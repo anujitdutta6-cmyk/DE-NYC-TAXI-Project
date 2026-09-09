@@ -1,0 +1,27 @@
+{
+	"name": "ds_nyc_taxi_src_greaterthan_9",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_nyc_taxi_api",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"p_month_greater": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": {
+					"value": "trip-data/green_tripdata_2023-@{dataset().p_month_greater}.parquet",
+					"type": "Expression"
+				}
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
