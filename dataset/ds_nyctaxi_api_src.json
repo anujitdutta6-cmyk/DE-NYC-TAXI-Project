@@ -1,0 +1,19 @@
+{
+	"name": "ds_nyctaxi_api_src",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_nyc_taxi_api",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": "trip-data/green_tripdata_2023-01.parquet"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}

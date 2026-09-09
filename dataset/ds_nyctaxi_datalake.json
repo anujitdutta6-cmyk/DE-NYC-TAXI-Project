@@ -1,0 +1,20 @@
+{
+	"name": "ds_nyctaxi_datalake",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_nyc_taxi_datalakestorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "trips2023",
+				"fileSystem": "bronze"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
