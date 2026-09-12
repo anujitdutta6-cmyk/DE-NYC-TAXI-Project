@@ -126,19 +126,7 @@ ForEach(month)
 ### Why this logic instead of 12 pipelines?
 
 Creating one pipeline per month would duplicate configuration and increase maintenance effort. A parameterized loop keeps the orchestration reusable and makes future changes easier.
-
-### Interview selection value
-
-An interviewer can ask:
-
-- Why ADF instead of Databricks for ingestion?
-- Why use ForEach?
-- Why parameterize the month?
-- How would you make this metadata-driven?
-- How would you handle a failed month without rerunning everything?
-- How would you add retry, timeout and monitoring?
-
-**Selection signal:** demonstrates orchestration, parameterization, reusability and practical problem-solving.
+demonstrates orchestration, parameterization, reusability and practical problem-solving.
 
 ---
 
@@ -163,19 +151,7 @@ ADF uses linked services and datasets to connect the source and target. Dynamic 
 ### Why separate orchestration and storage?
 
 ADF controls **when and how data moves**. ADLS controls **where the data is stored**. This separation allows the compute layer to change without redesigning the storage layer.
-
-### Interview selection value
-
-Possible questions:
-
-- ADLS Gen1 vs Gen2?
-- Why not store everything directly in a database?
-- What is hierarchical namespace?
-- How would you secure ADLS?
-- How would you design folder/partition structure?
-- How would you prevent unauthorized access?
-
-**Selection signal:** tests cloud storage fundamentals, security awareness and architectural separation.
+tests cloud storage fundamentals, security awareness and architectural separation.
 
 ---
 
@@ -200,18 +176,7 @@ Source data is landed in the data lake before downstream transformation. Transfo
 ### Why not transform everything immediately?
 
 If the source is transformed and the original data is discarded, debugging a downstream issue becomes harder. Keeping raw data gives engineers a reference point for reconciliation and replay.
-
-### Interview selection value
-
-Possible questions:
-
-- Why is Bronze important?
-- Should Bronze data be transformed?
-- How long should raw data be retained?
-- How do you reprocess a failed Silver job?
-- How would you handle duplicate files?
-
-**Selection signal:** demonstrates understanding of data lifecycle, lineage and recoverability.
+demonstrates understanding of data lifecycle, lineage and recoverability.
 
 ---
 
@@ -263,27 +228,7 @@ Deduplicate where required
      │
      ▼
 Silver dataset
-```
 
-### Why PySpark instead of pandas?
-
-Pandas is excellent for small to medium in-memory workloads. PySpark is designed for distributed processing across a cluster, making it a stronger choice when data volume and transformation complexity grow.
-
-### Interview selection value
-
-Possible questions:
-
-- Why Spark?
-- What is lazy evaluation?
-- Transformation vs action?
-- How does Spark execute a job?
-- What causes a shuffle?
-- How do you handle data skew?
-- Repartition vs coalesce?
-- How would you optimize a slow join?
-- Why can too many small files be a problem?
-
-**Selection signal:** demonstrates actual data-engineering fundamentals rather than only Azure GUI knowledge.
 
 ---
 
@@ -308,18 +253,7 @@ Silver datasets are transformed into curated analytical structures using busines
 ### Why not expose Silver directly?
 
 Silver is designed for reusable refined data. Gold provides a stable consumption layer so analytical users do not need to repeatedly implement the same business logic.
-
-### Interview selection value
-
-Possible questions:
-
-- What belongs in Gold?
-- Silver vs Gold?
-- Star schema vs Snowflake schema?
-- Where should business logic live?
-- How would you optimize Gold for BI queries?
-
-**Selection signal:** demonstrates the difference between technical data cleansing and business-facing data modeling.
+demonstrates the difference between technical data cleansing and business-facing data modeling.
 
 ---
 
@@ -358,21 +292,7 @@ Delta maintains a transaction log alongside data files. Table operations are rec
 
 **Delta = table/storage layer built on data files plus transaction-log capabilities.**
 
-That distinction is a common Data Engineering interview topic.
-
-### Interview selection value
-
-Possible questions:
-
-- Delta vs Parquet?
-- What is `_delta_log`?
-- How does Delta provide ACID behavior?
-- What is Time Travel?
-- How would you restore an older version?
-- What is schema evolution?
-- What happens during an update or merge?
-
-**Selection signal:** tests modern lakehouse fundamentals and whether the candidate understands what happens underneath the UI.
+tests modern lakehouse fundamentals and whether the candidate understands what happens underneath the UI.
 
 ---
 
@@ -422,7 +342,6 @@ Possible questions:
 - Where should secrets be stored?
 - How would you roll back a deployment?
 
-**Selection signal:** demonstrates software-engineering maturity in Data Engineering.
 
 ---
 
@@ -463,17 +382,7 @@ ForEach
         +
 Dynamic path/file logic
 ```
-
-### Interview selection value
-
-Possible questions:
-
-- Pipeline parameter vs variable?
-- Dataset parameter vs pipeline parameter?
-- How do dynamic expressions work?
-- How would you make this metadata-driven?
-
-**Selection signal:** demonstrates reusable ETL design and reduction of operational maintenance.
+demonstrates reusable ETL design and reduction of operational maintenance.
 
 ---
 
@@ -510,15 +419,7 @@ Pattern A    Pattern B
      Copy data
 ```
 
-### Why not create separate pipelines?
-
-The difference is a source-routing rule, not a fundamentally different business workflow. Keeping it inside one reusable pipeline reduces duplication.
-
-### Interview selection value
-
-This creates a strong practical question: **"What do you do when a source naming convention changes halfway through the year?"**
-
-**Selection signal:** demonstrates ability to adapt orchestration logic to imperfect real-world systems.
+demonstrates ability to adapt orchestration logic to imperfect real-world systems.
 
 ---
 
@@ -550,9 +451,6 @@ A production extension of this project could include:
 - Pipeline audit logging
 - Alerting and monitoring
 
-### Why is this important for interviews?
-
-Interviewers often distinguish candidates who know how to **move data** from candidates who know how to **operate reliable data pipelines**.
 
 ---
 
@@ -578,18 +476,6 @@ A production implementation can use managed identities/service principals, Azure
 
 Security should be part of architecture rather than an afterthought.
 
-### Interview selection value
-
-Possible questions:
-
-- Managed Identity vs Service Principal?
-- How would ADF access ADLS securely?
-- Where would you store secrets?
-- RBAC vs ACL?
-- How would you implement least privilege?
-
-**Selection signal:** demonstrates production awareness beyond ETL coding.
-
 ---
 
 # 12. Testing
@@ -613,17 +499,6 @@ Unit tests can validate transformation functions, expected schemas, edge cases a
 ### Why is testing valuable in Data Engineering?
 
 A pipeline can run successfully while silently producing incorrect values. Automated tests reduce this risk.
-
-### Interview selection value
-
-Possible questions:
-
-- What would you unit test?
-- Unit vs integration testing?
-- How do you test PySpark transformations?
-- How would you test schema changes?
-
-**Selection signal:** shows engineering discipline and maintainability.
 
 ---
 
@@ -659,96 +534,7 @@ DE-NYC-TAXI-Project/
 ├── taxi_zone_lookup.csv
 └── README.md
 ```
-
 ---
-
-# Interview-Oriented Technical Discussion
-
-This project can be discussed in an interview using the following progression:
-
-### Level 1 — Fundamentals
-
-- What is ETL vs ELT?
-- What is a data lake?
-- What is ADLS Gen2?
-- What is ADF?
-- What is Databricks?
-- What is Spark?
-- What is Parquet?
-- What is Delta Lake?
-
-### Level 2 — Pipeline Design
-
-- Why ADF for orchestration?
-- Why Databricks for transformation?
-- Why separate Bronze, Silver and Gold?
-- Why parameterize the pipeline?
-- Why use ForEach?
-- How would you handle source failures?
-- How would you implement incremental ingestion if the source supported it?
-
-### Level 3 — Spark / PySpark
-
-- Lazy evaluation
-- Transformations and actions
-- Narrow vs wide transformations
-- Shuffle
-- Partitioning
-- Repartition vs coalesce
-- Broadcast joins
-- Data skew
-- Caching
-- Small-file problem
-- Spark execution model
-
-### Level 4 — Delta Lake / Lakehouse
-
-- Delta transaction log
-- ACID transactions
-- Time Travel
-- Versioning
-- MERGE
-- Schema evolution
-- Optimizing Delta tables
-- File compaction and maintenance concepts
-
-### Level 5 — Production Engineering
-
-- CI/CD
-- Environment separation
-- Managed Identity / Service Principal
-- Azure RBAC and ACLs
-- Key Vault / secret management
-- Monitoring and alerting
-- Retry and failure recovery
-- Data quality checks
-- Audit logging
-- Idempotency
-- Backfill and reprocessing
-- Cost optimization
-
----
-
-# Key Design Decisions — Interview Cheat Sheet
-
-| Decision | What | Why | When | How |
-|---|---|---|---|---|
-| **ADF** | Orchestration service | Managed workflow control | Multi-step cloud ingestion | Pipelines, activities, parameters and dependencies |
-| **ForEach** | Looping activity | Avoid duplicated pipelines | Multiple months/files/partitions | Iterate over a parameter/list |
-| **Parameters** | Runtime inputs | Reusability | Same logic, different values | Pass values into datasets/activities |
-| **ADLS Gen2** | Cloud data lake | Scalable storage/decoupled compute | Lake/lakehouse architectures | Store raw/refined/curated data |
-| **Bronze** | Raw layer | Source preservation/reprocessing | Initial landing | Keep source-aligned data |
-| **Silver** | Refined layer | Data quality and standardization | Before analytics | Validate, clean, transform and deduplicate |
-| **Gold** | Curated layer | Consumer-ready analytics | Reporting/analytics | Aggregate and apply business logic |
-| **PySpark** | Distributed processing API | Scale transformation workloads | Large/complex data processing | Spark DataFrame transformations/actions |
-| **Parquet** | Columnar file format | Efficient analytical storage | File-based data lake workloads | Store partitioned columnar files |
-| **Delta Lake** | Lakehouse table layer | Transactions/versioning/reliability | Production-style lakehouse tables | Delta tables + transaction log |
-| **DAB** | Deployment/project framework | Repeatability and source control | Databricks CI/CD workflows | YAML configuration + resources + source |
-| **PyTest** | Testing framework | Catch defects early | Development/deployment | Unit and integration-oriented tests |
-
----
-
-# Why This Project Is Industry-Relevant
 
 This project demonstrates the complete engineering lifecycle:
 
