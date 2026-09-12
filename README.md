@@ -72,7 +72,7 @@ The repository contains version-controlled ADF artifacts and a Databricks projec
 
 | Layer / Capability | Technology | What it does | Why it is used |
 |---|---|---|---|
-| Source | NYC Taxi Web/API data | Provides source data | Represents an external data source |
+| Source | NYC Taxi Web/API data | Provides source data | Represents an external data source: https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page|
 | Orchestration | **Azure Data Factory** | Controls ingestion workflow | Managed orchestration, parameterization and scheduling |
 | Storage | **ADLS Gen2** | Stores lake data | Scalable and cost-effective cloud object storage |
 | Processing | **Azure Databricks** | Executes distributed processing | Suitable for large-scale transformation |
